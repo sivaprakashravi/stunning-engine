@@ -1,0 +1,32 @@
+<div class="instance">
+    <div class="contacts">
+        <h4>Add Contacts [{{contactList.length}}]
+            <input type="file" class="upload" (change)="uploadFile($event)">
+            <span>Browse</span>
+            <span class="add" (click)="pushNewContact()">+</span>
+        </h4>
+        <div>
+            <ul>
+                <li> <label>Name</label> </li>
+                <li> <label>Phone Number</label> </li>
+                <span></span>
+            </ul>
+            <ul *ngFor="let c of contactList">
+                <li> <input [disabled]="c.file" [(ngModel)]="c.name" type="text"> </li>
+                <li> <input [disabled]="c.file" [(ngModel)]="c.number" type="text"> </li>
+                <span></span>
+            </ul>
+        </div>
+    </div>
+    <div class="session-manager">
+        <h4>Whatsapp Web <span *ngIf="isLoggedIn">Logged In: {{since}}</span></h4>
+        <div class="barcode" *ngIf="barcode">
+            <qr-code [value]="barcode" size="300" errorCorrectionLevel="M"></qr-code>
+            <div class="blur" *ngIf="isLoggedIn"></div>
+        </div>
+        <div class="actions">
+            <button *ngIf="isLoggedIn" (click)="message()">Send</button>
+            <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+        </div>
+    </div>
+</div>
